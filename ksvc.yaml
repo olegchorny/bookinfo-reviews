@@ -1,0 +1,15 @@
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: review
+  namespace: bookinfo
+spec:
+  template:
+    spec:
+      containers:
+      - image: ochorny/review
+        ports:
+        - containerPort: 8080
+        env:
+          - name: SERVICES_DOMAIN # The environment variable printed out by the sample app
+            value: "bookinfo.svc.cluster.local"

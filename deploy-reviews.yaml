@@ -1,11 +1,11 @@
 apiVersion: tekton.dev/v1alpha1
 kind: TaskRun
 metadata:
-  name: build-reviews
+  name: deploy-reviews
 spec:
-  serviceAccount: build-bot
+# serviceAccount: build-bot
   taskRef:
-    name: kaniko
+    name: deploy-using-kubectl
   inputs:
     resources:
     - name: source
@@ -14,16 +14,16 @@ spec:
         params:
         - name: url
           value: https://github.com/olegchorny/bookinfo-reviews
-    params:
-    - name: DOCKERFILE
-      value: ./reviews-wlpcfg/Dockerfile
-    - name: CONTEXT
-      value: ./reviews-wlpcfg/
-  outputs:
-    resources:
     - name: image
       resourceSpec:
         type: image
         params:
         - name: url
           value: ochorny/bookinfo-reviews
+    params:
+      - name: path
+        value: /workspace/source/ksvc.yaml #configure: may change according to your source
+      - name: yqArg
+        value: "-d0"
+      - name: yamlPathToImage
+        value: "spec.template.spec.containers[0].image"
