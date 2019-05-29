@@ -1,13 +1,13 @@
 apiVersion: serving.knative.dev/v1alpha1
 kind: Service
 metadata:
-  name: review
+  name: reviews
   namespace: bookinfo
 spec:
   template:
     spec:
       containers:
-      - image: ochorny/review
+      - image: ochorny/reviews
         ports:
         - containerPort: 8080
         env:
