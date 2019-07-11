@@ -26,7 +26,7 @@ ARG star_color
 ENV SERVICE_VERSION ${service_version:-v3}
 ENV ENABLE_RATINGS ${enable_ratings:-true}
 ENV STAR_COLOR ${star_color:-red}
-ENV SERVICES_DOMAIN=komet.plerion.io
+ENV SERVICES_DOMAIN=master.komet.plerion.io
 EXPOSE 8080
 
 CMD /opt/ibm/wlp/bin/server run defaultServer
