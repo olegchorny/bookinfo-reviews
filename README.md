@@ -1,3 +1,3 @@
 # bookinfo-reviews
 test for komet
-stage test.
+stage test #2
