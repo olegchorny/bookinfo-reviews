@@ -1,3 +1,2 @@
 # bookinfo-reviews
-test for komet
-stage test #2
+komet demo
