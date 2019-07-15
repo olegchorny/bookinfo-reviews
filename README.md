@@ -1,2 +1,2 @@
 # bookinfo-reviews
-komet demo
+mailgun test
