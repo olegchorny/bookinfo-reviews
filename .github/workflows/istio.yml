@@ -9,9 +9,11 @@ jobs:
       with: 
         repository: 'istio/istio'
         ref: '1.2.5'
+        path: 'istio'
     - name: Helm  
       run: |
-        ls
+        ls -la
+        ls istio
         
         
 # helm template install/kubernetes/helm/istio-init --name istio-init --namespace istio-system 
