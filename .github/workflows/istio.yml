@@ -1,0 +1,13 @@
+name: Istio Install
+on: [push]
+jobs:
+  istio:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Istio Checkout
+      uses: actions/checkout@v1
+      with: 
+        repository: 'istio/istio'
+        ref: '1.2.5'
+      
+      
