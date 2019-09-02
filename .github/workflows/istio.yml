@@ -4,14 +4,25 @@ jobs:
   istio:
     runs-on: ubuntu-latest
     steps:
-#     - name: Istio Checkout
-#       uses: actions/checkout@v1
-#       with: 
-#         repository: 'istio/istio'
-#         ref: '1.2.5'
-#         path: 'istio'
-    - name: Helm  
+    - name: Setup python
+      uses: actions/setup-python@v1 
+      with:
+        python-version: '3.x'
+        architecture: 'x64' 
+    - name: VKS context
+      uses: ventus-ag/vks-action@master
+      with: 
+        authUrl: ${{ secrets.URL }}
+        projectName: ${{ secrets.PROJECT }}
+        domainName: ${{ secrets.DOMAIN }}
+        userName: ${{ secrets.USER }}
+        userDomainName: ${{ secrets.USERDOMAIN }}
+        userPassword: ${{ secrets.PASSWORD }}
+        clusterName: ${{ secrets.CLUSTER }}
+    - name: Create Namespace
+      run: |
+        kubectl create namespace istio-system --dry-run -o yaml | kubectl apply -f -
+    - name: Istio Init
       run: |
         git clone --branch '1.2.5' https://github.com/istio/istio.git
-        helm template istio/install/kubernetes/helm/istio-init --name istio-init --namespace istio-system 
-
+        helm template istio/install/kubernetes/helm/istio-init --name istio-init --namespace istio-system | kubectl apply -f -
