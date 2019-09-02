@@ -4,14 +4,14 @@ jobs:
   istio:
     runs-on: ubuntu-latest
     steps:
-    - name: Istio Checkout
-      uses: actions/checkout@v1
-      with: 
-        repository: 'istio/istio'
-        ref: '1.2.5'
-        path: 'istio'
+#     - name: Istio Checkout
+#       uses: actions/checkout@v1
+#       with: 
+#         repository: 'istio/istio'
+#         ref: '1.2.5'
+#         path: 'istio'
     - name: Helm  
       run: |
-        git pull
+        git clone --branch '1.2.5' https://github.com/istio/istio.git
         helm template istio/install/kubernetes/helm/istio-init --name istio-init --namespace istio-system 
 
