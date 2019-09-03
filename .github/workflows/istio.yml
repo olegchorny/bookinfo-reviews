@@ -18,7 +18,8 @@ jobs:
         userName: ${{ secrets.USER }}
         userDomainName: ${{ secrets.USERDOMAIN }}
         userPassword: ${{ secrets.PASSWORD }}
-        clusterName: ${{ secrets.CLUSTER }}
+#         clusterName: ${{ secrets.CLUSTER }}
+        clusterName: 'istio2'
     - name: Create istio-system Namespace
       run: |
         kubectl create namespace istio-system --dry-run -o yaml | kubectl apply -f -
