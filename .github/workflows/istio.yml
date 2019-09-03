@@ -28,7 +28,7 @@ jobs:
     - name: Istio Demo Install
       run: |
         helm template istio/install/kubernetes/helm/istio --name istio --namespace istio-system --values istio/install/kubernetes/helm/istio/values-istio-demo.yaml | kubectl apply -f -
-    - name: Bookinfo Demo Install
+    - name: Bookinfo Install
       run: |
         kubectl label namespace default istio-injection=enabled && kubectl apply -f istio/samples/bookinfo/platform/kube/bookinfo.yaml && kubectl apply -f istio/samples/bookinfo/networking/bookinfo-gateway.yaml
 
