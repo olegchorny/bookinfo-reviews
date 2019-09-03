@@ -25,7 +25,7 @@ jobs:
     - name: Istio Init
       run: |
         git clone --branch '1.2.5' https://github.com/istio/istio.git && helm template istio/install/kubernetes/helm/istio-init --name istio-init --namespace istio-system | kubectl apply -f -
-    - name: Istio Demo Install
+    - name: Istio Install
       run: |
         helm template istio/install/kubernetes/helm/istio --name istio --namespace istio-system --values istio/install/kubernetes/helm/istio/values-istio-demo.yaml | kubectl apply -f -
     - name: Bookinfo Install
