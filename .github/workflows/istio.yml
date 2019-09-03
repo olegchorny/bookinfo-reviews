@@ -34,11 +34,11 @@ jobs:
     - name: Get Ingress IP
       run: |
         export INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+    - name: Check Productpage
+      run: |
         curl -s -o /dev/null -w ''%{http_code}'' $INGRESS_HOST/productpage
-#     - name: Check Productpage
-#       run: |
-#         while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' $INGRESS_HOST/productpage)" != "200" ]]; do sleep 5; done
-        
+
+## new cluster test
 
 
     
