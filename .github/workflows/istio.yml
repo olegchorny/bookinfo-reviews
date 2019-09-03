@@ -31,12 +31,12 @@ jobs:
     - name: Bookinfo Install
       run: |
         kubectl label namespace default istio-injection=enabled --overwrite=true && kubectl apply -f istio/samples/bookinfo/platform/kube/bookinfo.yaml && kubectl apply -f istio/samples/bookinfo/networking/bookinfo-gateway.yaml
-    - name: Get Ingress IP
-      run: |
-        export INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+#     - name: Get Ingress IP
+#       run: |
+#         INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
     - name: Check Productpage
       run: |
-        curl -s -o /dev/null -w ''%{http_code}'' $INGRESS_HOST/productpage
+        curl -s -o /dev/null -w ''%{http_code}'' $(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')/productpage
 
 ## new cluster test3 
 
