@@ -9,7 +9,7 @@ jobs:
       with:
         python-version: '3.x'
         architecture: 'x64'
-    - name: VKS context
+    - name: VKS context 
       uses: ventus-ag/vks-action@master
       with: 
         authUrl: ${{ secrets.URL }}
