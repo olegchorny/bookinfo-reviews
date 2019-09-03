@@ -28,6 +28,10 @@ jobs:
     - name: Istio Install
       run: |
         helm template istio/install/kubernetes/helm/istio --name istio --namespace istio-system --values istio/install/kubernetes/helm/istio/values-istio-demo.yaml | kubectl apply -f -
+    - name: Istio Double Check
+      if: failure()
+      run: |
+        helm template istio/install/kubernetes/helm/istio --name istio --namespace istio-system --values istio/install/kubernetes/helm/istio/values-istio-demo.yaml | kubectl apply -f -
     - name: Bookinfo Install
       run: |
         kubectl label namespace default istio-injection=enabled --overwrite=true && kubectl apply -f istio/samples/bookinfo/platform/kube/bookinfo.yaml && kubectl apply -f istio/samples/bookinfo/networking/bookinfo-gateway.yaml
@@ -39,6 +43,3 @@ jobs:
         curl -s -o /dev/null -w ''%{http_code}'' $(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')/productpage
 
 ## new cluster test3 
-
-
-    
