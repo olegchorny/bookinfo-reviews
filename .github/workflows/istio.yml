@@ -43,4 +43,4 @@ jobs:
       run: |
         curl -s -o /dev/null -w ''%{http_code}'' $(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')/productpage
 
-## new cluster test3 
+## new cluster 
