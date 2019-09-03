@@ -4,7 +4,7 @@ jobs:
   istio:
     runs-on: ubuntu-latest
     steps:
-    - name: Setup Python
+    - name: Setup Python v3
       uses: actions/setup-python@v1 
       with:
         python-version: '3.x'
