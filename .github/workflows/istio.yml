@@ -30,7 +30,9 @@ jobs:
         helm template istio/install/kubernetes/helm/istio --name istio --namespace istio-system --values istio/install/kubernetes/helm/istio/values-istio-demo.yaml | kubectl apply -f -
     - name: Bookinfo Install
       run: |
-        kubectl label namespace default istio-injection=enabled && kubectl apply -f istio/samples/bookinfo/platform/kube/bookinfo.yaml && kubectl apply -f istio/samples/bookinfo/networking/bookinfo-gateway.yaml
+        kubectl label namespace default istio-injection=enabled --dry-run -o yaml | kubectl apply -f - 
+        kubectl apply -f istio/samples/bookinfo/platform/kube/bookinfo.yaml
+        kubectl apply -f istio/samples/bookinfo/networking/bookinfo-gateway.yaml
     - name: Get Ingress IP
       run: |
         export INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
